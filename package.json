@@ -1,0 +1,16 @@
+{
+  "name": "react-native-biopass",
+  "version": "0.0.0",
+  "license": "MIT",
+  "repository": "LinusU/react-native-biopass",
+  "keywords": [
+    "face-id",
+    "fingerprint",
+    "keystore",
+    "react-native",
+    "touch-id"
+  ],
+  "peerDependencies": {
+    "react-native": ">=0.56"
+  }
+}
