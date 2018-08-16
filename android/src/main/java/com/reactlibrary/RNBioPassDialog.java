@@ -150,6 +150,16 @@ public class RNBioPassDialog extends BottomSheetDialog {
           }
         });
       }
+
+      @Override
+      public void onAuthenticationError(final int errorCode, final CharSequence errString) {
+        icon.post(new Runnable() {
+          public void run () {
+            dialog.hide();
+            callback.reject(new Exception(errString.toString()));
+          }
+        });
+      }
     }, null);
 
     show();
