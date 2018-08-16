@@ -11,6 +11,7 @@ import com.facebook.react.bridge.Callback;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.res.ColorStateList;
 import android.content.res.Resources;
 import android.util.TypedValue;
@@ -139,6 +140,20 @@ public class RNBioPassDialog extends BottomSheetDialog {
     final Activity activity = reactContext.getCurrentActivity();
 
     cancellationSignal = new CancellationSignal();
+
+    dialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+      @Override
+      public void onCancel(DialogInterface dialog) {
+        icon.post(new Runnable() {
+          public void run () {
+            cancellationSignal.cancel();
+            cancellationSignal = null;
+
+            callback.reject(new Exception("User cancelled dialog"));
+          }
+        });
+      }
+    });
 
     fingerprintManager.authenticate(cryptoObject, cancellationSignal, 0, new FingerprintManager.AuthenticationCallback() {
       @Override
